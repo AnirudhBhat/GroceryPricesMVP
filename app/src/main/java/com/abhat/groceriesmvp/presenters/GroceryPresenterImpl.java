@@ -6,7 +6,7 @@ import com.abhat.groceriesmvp.network.GroceryInteractor;
 import java.util.ArrayList;
 
 /**
- * Created by cumulations on 18/4/17.
+ * Created by Anirudh on 18/4/17.
  */
 
 public class GroceryPresenterImpl implements GroceryPresenter, GroceryInteractor.onGroceryPricesFetchFinished {
@@ -29,7 +29,10 @@ public class GroceryPresenterImpl implements GroceryPresenter, GroceryInteractor
 
     @Override
     public void networkError() {
-
+        if (mMainView != null) {
+            mMainView.hideProgressBar();
+            mMainView.showNetworkError();
+        }
     }
 
     @Override

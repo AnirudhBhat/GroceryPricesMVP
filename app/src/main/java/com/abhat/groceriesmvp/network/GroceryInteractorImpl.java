@@ -9,10 +9,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by cumulations on 18/4/17.
+ * Created by Anirudh on 18/4/17.
  */
 
 public class GroceryInteractorImpl implements GroceryInteractor {
@@ -29,9 +30,32 @@ public class GroceryInteractorImpl implements GroceryInteractor {
     Thread groceryPrices = new Thread(new Runnable() {
         @Override
         public void run() {
-            groceryPrices();
+            if (isOnline()) {
+                groceryPrices();
+            } else {
+                ((MainActivity)App.getContext()).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mListener.networkError();
+                    }
+                });
+            }
         }
     });
+
+
+    public boolean isOnline() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int     exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+        }
+        catch (IOException e)          { e.printStackTrace(); }
+        catch (InterruptedException e) { e.printStackTrace(); }
+
+        return false;
+    }
 
     private void groceryPrices() {
         String url = "http://www.hopcoms.kar.nic.in/RateList.aspx";
@@ -51,8 +75,6 @@ public class GroceryInteractorImpl implements GroceryInteractor {
                 price.add(elem3.get(0).text());
                 j++;
             }
-            /*adapter.setLists(Vegetable, price);
-            adapter.notifyDataSetChanged();*/
 
         } catch (Exception e) {
             //e.printStackTrace();

@@ -3,7 +3,7 @@ package com.abhat.groceriesmvp.network;
 import java.util.ArrayList;
 
 /**
- * Created by cumulations on 18/4/17.
+ * Created by Anirudh on 18/4/17.
  */
 
 public interface GroceryInteractor {

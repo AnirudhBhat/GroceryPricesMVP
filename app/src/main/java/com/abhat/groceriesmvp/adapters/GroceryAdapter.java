@@ -13,7 +13,7 @@ import com.abhat.groceriesmvp.R;
 import java.util.List;
 
 /**
- * Created by cumulations on 12/4/17.
+ * Created by Anirudh on 12/4/17.
  */
 
 public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.ViewHolder> {

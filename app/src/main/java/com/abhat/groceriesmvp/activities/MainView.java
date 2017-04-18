@@ -3,11 +3,12 @@ package com.abhat.groceriesmvp.activities;
 import java.util.ArrayList;
 
 /**
- * Created by cumulations on 18/4/17.
+ * Created by Anirudh on 18/4/17.
  */
 
 public interface MainView {
     void showProgressBar();
     void hideProgressBar();
+    void showNetworkError();
     void setGroceryPrices(ArrayList<String> groceries, ArrayList<String> groceryPrices);
 }
