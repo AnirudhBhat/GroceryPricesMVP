@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.abhat.groceriesmvp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,18 +20,44 @@ import java.util.List;
 public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.ViewHolder> {
 
     private Context mContext;
-    private List mGroceryList;
-    private List mGroceryPriceList;
+    private List<String> mGroceryList;
+    private List<String> mGroceryPriceList;
+    private List<String> items = new ArrayList<String>();
+    private List<String> itemsPrice = new ArrayList<String>();
 
     public GroceryAdapter(Context context, List groceryList, List groceryPriceList) {
         this.mContext = context;
         this.mGroceryList = groceryList;
         this.mGroceryPriceList = groceryPriceList;
+        this.items.addAll(groceryList);
+        this.itemsPrice.addAll(groceryPriceList);
     }
 
     public void setLists(List groceries, List groceryPrices) {
         this.mGroceryList = groceries;
         this.mGroceryPriceList = groceryPrices;
+        this.items.addAll(groceries);
+        this.itemsPrice.addAll(groceryPrices);
+    }
+
+    public void filter(String text) {
+        if(text.isEmpty()){
+            mGroceryList.clear();
+            mGroceryPriceList.clear();
+            mGroceryList.addAll(items);
+            mGroceryPriceList.addAll(itemsPrice);
+        } else{
+            mGroceryList.clear();
+            mGroceryPriceList.clear();
+            text = text.toLowerCase();
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).toString().toLowerCase().contains(text)) {
+                    mGroceryList.add(items.get(i));
+                    mGroceryPriceList.add(itemsPrice.get(i));
+                }
+            }
+        }
+        this.notifyDataSetChanged();
     }
 
     @Override
