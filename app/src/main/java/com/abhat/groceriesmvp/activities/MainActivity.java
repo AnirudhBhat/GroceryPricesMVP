@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -40,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements MainView{
         mRecyclerView.setAdapter(mAdapter);
         mGroceryPresenter = new GroceryPresenterImpl(this, new GroceryInteractorImpl());
         mGroceryPresenter.fetchGroceryPrices();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
