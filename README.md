@@ -1,6 +1,8 @@
 # GroceryPricesMVP
 Grocery prices (only for Karnataka) using MVP architecture.
 
+# https://github.com/AnirudhBhat/Grocery-prices-Bengaluru repo which is written in kotlin
+
 
 ===========
 Screenshots
